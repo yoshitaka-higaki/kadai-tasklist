@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_action :require_user_logged_in
-  before_action :correct_user, only: [:show,:update,:destroy]
+  before_action :correct_user, only: [:show, :edit, :update, :destroy]
   
   def index
     @tasks = current_user.tasks.order(id: :desc)
@@ -46,7 +46,8 @@ class TasksController < ApplicationController
     redirect_to tasks_url
   end
   
-   private
+  private
+  
   def task_params
     params.require(:task).permit(:content, :status)
   end
